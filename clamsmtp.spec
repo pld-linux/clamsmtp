@@ -1,9 +1,8 @@
-# $Revision: 1.2 $
-Summary:	clamsmtp -- clamav-based antivirus SMTP-level gateway
-Summary(pl):	clamsmtp -- oparta na clamavie bramka antywirusowa SMTP
+Summary:	clamsmtp - clamav-based antivirus SMTP-level gateway
+Summary(pl):	clamsmtp - oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
 Version:	0.8
-Release:	0
+Release:	0.1
 License:	BSD
 Group:		Applications/Networking
 Source0:	http://memberwebs.com/nielsen/software/clamsmtp/%{name}-%{version}.tar.gz
@@ -13,7 +12,7 @@ URL:		http://memberwebs.com/nielsen/software/clamsmtp/
 PreReq:		rc-scripts
 #BuildRequires:	pcre-devel
 #Requires:	pcre
-# FIXMI: which package in PLD provides 'netfilter' ? 
+# FIXME: which package in PLD provides 'netfilter' ? 
 #Requires:	netfilter
 Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
