@@ -1,0 +1,66 @@
+#!/bin/sh
+#
+# chkconfig:	345 60 40
+#
+# description:	clamsmtp provides transparent antivirus scanner \
+#		gateway for the SMTP protocol.
+#
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/clamsmtp ] && . /etc/sysconfig/clamsmtp
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/clamsmtp ]; then
+		msg_starting clamsmtp
+		[ -f /var/run/clamsmtp/clamsmtp.pid ] && rm -f /var/run/clamsmtp/clamsmtp.pid
+		daemon "/usr/sbin/clamsmtp"
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/clamsmtp		
+	else
+		msg_already_running clamsmtp
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/clamsmtp ]; then
+		msg_stopping clamsmtp
+		killproc clamsmtp
+		rm -f /var/run/clamsmtp.pid /var/lock/subsys/clamsmtp >/dev/null 2>&1
+	else
+		msg_not_running clamsmtp
+	fi	
+	;;
+  restart)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  status)
+	status clamsmtp
+	exit $?
+	;;
+  reload|force-reload)
+	if [ -f /var/lock/subsys/clamsmtp ]; then
+		msg_reloading clamsmtp
+		killproc clamsmtp -HUP
+		RETVAL=$?
+	else
+		msg_not_running clamsmtp >&2
+		exit 7
+	fi
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|reload|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
