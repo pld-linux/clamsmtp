@@ -1,5 +1,5 @@
-Summary:	clamsmtp - clamav-based antivirus SMTP-level gateway
-Summary(pl):	clamsmtp - oparta na clamavie bramka antywirusowa SMTP
+Summary:	clamav-based antivirus SMTP-level gateway
+Summary(pl):	Oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
 Version:	1.3
 Release:	1
