@@ -1,4 +1,4 @@
-# $Revision: 1.1 $
+# $Revision: 1.2 $
 Summary:	clamsmtp -- clamav-based antivirus SMTP-level gateway
 Summary(pl):	clamsmtp -- oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
@@ -23,7 +23,7 @@ clamsmtp provides transparent antivirus scanner gateway for the SMTP
 protocol.
 
 %description -l pl
-pop3vscan dostarcza przezroczystej bramki antywirusowej dla protoko³u
+clamsmtp dostarcza przezroczystej bramki antywirusowej dla protoko³u
 SMTP.
 
 %prep
