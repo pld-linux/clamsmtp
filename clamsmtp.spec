@@ -77,7 +77,7 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/clamsmtpd
 %attr(755,root,root) %{_sbindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/clamsmtpd.conf
-%dir %attr(750,root,clamav) /var/spool/clamsmtpd
-%dir %attr(750,root,clamav) /var/spool/clamsmtpd/tmp
+%dir %attr(770,root,clamav) /var/spool/clamsmtpd
+%dir %attr(770,root,clamav) /var/spool/clamsmtpd/tmp
 %{_mandir}/man5/clamsmtpd.conf.5*
 %{_mandir}/man8/clamsmtpd.8*
