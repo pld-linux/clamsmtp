@@ -9,12 +9,11 @@ Source0:	http://memberwebs.com/nielsen/software/clamsmtp/%{name}-%{version}.tar.
 # Source0-md5:	971d34209af997f3a76be67683464d7e
 Source1:	%{name}.init
 URL:		http://memberwebs.com/nielsen/software/clamsmtp/
-PreReq:		rc-scripts
 #BuildRequires:	pcre-devel
-#Requires:	pcre
+PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 # FIXME: which package in PLD provides 'netfilter' ? 
 #Requires:	netfilter
-Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -22,19 +21,13 @@ clamsmtp provides transparent antivirus scanner gateway for the SMTP
 protocol.
 
 %description -l pl
-clamsmtp dostarcza przezroczystej bramki antywirusowej dla protoko³u
+clamsmtp dostarcza przezroczyst± bramkê antywirusow± dla protoko³u
 SMTP.
 
 %prep
 %setup -q
 
 %build
-
-#%%{__gettextize}
-#%%{__aclocal}
-#%%{__autoconf}
-#%%{__autoheader}
-#%%{__automake}
 %configure
 %{__make}
 
