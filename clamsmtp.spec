@@ -1,15 +1,18 @@
 Summary:	clamsmtp - clamav-based antivirus SMTP-level gateway
 Summary(pl):	clamsmtp - oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
-Version:	1.0
-Release:	0.1
+Version:	1.1
+Release:	0.5
 License:	BSD
 Group:		Applications/Networking
 Source0:	http://memberwebs.com/nielsen/software/clamsmtp/%{name}-%{version}.tar.gz
-# Source0-md5:	935a54b585c68258e9b68bceb7819a47
+# Source0-md5:	dbb077492c1ed5acca9beb91f2808e0c
 # Source0-size:	138446
 Source1:	%{name}.init
 URL:		http://memberwebs.com/nielsen/software/clamsmtp/
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool
 #BuildRequires:	pcre-devel
 PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
@@ -29,17 +32,26 @@ SMTP.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
+
 %configure
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d \
-	$RPM_BUILD_ROOT{%{_sbindir},%{_sysconfdir},/etc/rc.d/init.d,/var/spool/%{name}}
+
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{_sysconfdir},/etc/rc.d/init.d}
+install -d $RPM_BUILD_ROOT{%{_mandir}/{man8,man5},/var/spool/%{name}}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/%{name}
 install doc/clamsmtpd.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install src/clamsmtpd $RPM_BUILD_ROOT%{_sbindir}
+install doc/clamsmtpd.conf.5 $RPM_BUILD_ROOT%{_mandir}/man5/
+install doc/clamsmtpd.8 $RPM_BUILD_ROOT%{_mandir}/man8/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,8 +74,10 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README NEWS
+%doc AUTHORS ChangeLog NEWS README
 %attr(754,root,root) /etc/rc.d/init.d/%{name}
 %attr(755,root,root) %{_sbindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/clamsmtpd.conf
 %dir /var/spool/%{name}
+%{_mandir}/man5/clamsmtpd.conf.5*
+%{_mandir}/man8/clamsmtpd.8*
