@@ -2,12 +2,13 @@ Summary:	clamsmtp - clamav-based antivirus SMTP-level gateway
 Summary(pl):	clamsmtp - oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
 Version:	1.1
-Release:	0.6
+Release:	1
 License:	BSD
 Group:		Applications/Networking
 Source0:	http://memberwebs.com/nielsen/software/clamsmtp/%{name}-%{version}.tar.gz
 # Source0-md5:	dbb077492c1ed5acca9beb91f2808e0c
 Source1:	%{name}.init
+Patch0:		%{name}-config.patch
 URL:		http://memberwebs.com/nielsen/software/clamsmtp/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -27,6 +28,7 @@ SMTP.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -42,7 +44,7 @@ SMTP.
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_sysconfdir},/etc/rc.d/init.d}
-install -d $RPM_BUILD_ROOT{%{_mandir}/{man8,man5},/var/spool/%{name}}
+install -d $RPM_BUILD_ROOT{%{_mandir}/{man8,man5},/var/spool/clamsmtpd/tmp}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/clamsmtpd
 install doc/clamsmtpd.conf $RPM_BUILD_ROOT%{_sysconfdir}
@@ -75,6 +77,7 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/clamsmtpd
 %attr(755,root,root) %{_sbindir}/*
 %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/clamsmtpd.conf
-%dir /var/spool/%{name}
+%dir %attr(750,root,clamav) /var/spool/clamsmtpd
+%dir %attr(750,root,clamav) /var/spool/clamsmtpd/tmp
 %{_mandir}/man5/clamsmtpd.conf.5*
 %{_mandir}/man8/clamsmtpd.8*
