@@ -13,30 +13,29 @@
 . /etc/sysconfig/network
 
 # Get service config
-[ -f /etc/sysconfig/clamsmtp ] && . /etc/sysconfig/clamsmtp
+[ -f /etc/sysconfig/clamsmtpd ] && . /etc/sysconfig/clamsmtpd
 
 RETVAL=0
 # See how we were called.
 case "$1" in
   start)
 	# Check if the service is already running?
-	if [ ! -f /var/lock/subsys/clamsmtp ]; then
-		msg_starting clamsmtp
-		[ -f /var/run/clamsmtp/clamsmtp.pid ] && rm -f /var/run/clamsmtp/clamsmtp.pid
-		daemon "/usr/sbin/clamsmtp"
+	if [ ! -f /var/lock/subsys/clamsmtpd ]; then
+		msg_starting clamsmtpd
+		daemon "/usr/sbin/clamsmtpd"
 		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/clamsmtp		
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/clamsmtpd
 	else
-		msg_already_running clamsmtp
+		msg_already_running clamsmtpd
 	fi
 	;;
   stop)
-	if [ -f /var/lock/subsys/clamsmtp ]; then
-		msg_stopping clamsmtp
-		killproc clamsmtp
-		rm -f /var/run/clamsmtp.pid /var/lock/subsys/clamsmtp >/dev/null 2>&1
+	if [ -f /var/lock/subsys/clamsmtpd ]; then
+		msg_stopping clamsmtpd
+		killproc clamsmtpd
+		rm -f /var/lock/subsys/clamsmtpd >/dev/null 2>&1
 	else
-		msg_not_running clamsmtp
+		msg_not_running clamsmtpd
 	fi	
 	;;
   restart)
@@ -45,16 +44,16 @@ case "$1" in
 	exit $?
 	;;
   status)
-	status clamsmtp
+	status clamsmtpd
 	exit $?
 	;;
   reload|force-reload)
-	if [ -f /var/lock/subsys/clamsmtp ]; then
-		msg_reloading clamsmtp
-		killproc clamsmtp -HUP
+	if [ -f /var/lock/subsys/clamsmtpd ]; then
+		msg_reloading clamsmtpd
+		killproc clamsmtpd -HUP
 		RETVAL=$?
 	else
-		msg_not_running clamsmtp >&2
+		msg_not_running clamsmtpd >&2
 		exit 7
 	fi
 	;;
