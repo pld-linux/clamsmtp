@@ -1,0 +1,19 @@
+diff -Nur old/doc/clamsmtpd.conf new/doc/clamsmtpd.conf
+--- old/doc/clamsmtpd.conf	2004-10-30 18:20:56.000000000 +0000
++++ new/doc/clamsmtpd.conf	2004-12-01 21:55:10.000000000 +0000
+@@ -26,13 +26,13 @@
+ #Listen: 0.0.0.0:10025
+ 
+ # The address clamd is listening on
+-#ClamAddress: /var/run/clamav/clamd
++#ClamAddress: /var/lib/clamav/clamd.socket
+ 
+ # A header to add to all scanned email
+ #ScanHeader: X-AV-Checked: ClamAV using ClamSMTP
+ 
+ # Directory for temporary files
+-#TempDirectory: /tmp
++#TempDirectory: /var/spool/clamsmtpd/tmp
+ 
+ # Whether or not to bounce email (default is to silently drop)
+ #Bounce: off
