@@ -1,7 +1,7 @@
 diff -Nur old/doc/clamsmtpd.conf new/doc/clamsmtpd.conf
---- old/doc/clamsmtpd.conf	2004-10-30 18:20:56.000000000 +0000
-+++ new/doc/clamsmtpd.conf	2004-12-01 21:55:10.000000000 +0000
-@@ -26,13 +26,13 @@
+--- old/doc/clamsmtpd.conf.orig	2005-03-12 06:28:08.000000000 +0100
++++ old/doc/clamsmtpd.conf	2005-05-13 01:09:28.000000000 +0200
+@@ -29,13 +29,13 @@
  #Listen: 0.0.0.0:10025
  
  # The address clamd is listening on
@@ -9,7 +9,7 @@ diff -Nur old/doc/clamsmtpd.conf new/doc/clamsmtpd.conf
 +#ClamAddress: /var/lib/clamav/clamd.socket
  
  # A header to add to all scanned email
- #ScanHeader: X-AV-Checked: ClamAV using ClamSMTP
+ #Header: X-Virus-Scanned: ClamAV using ClamSMTP
  
  # Directory for temporary files
 -#TempDirectory: /tmp
