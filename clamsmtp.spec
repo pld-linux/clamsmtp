@@ -13,9 +13,9 @@ URL:		http://memberwebs.com/nielsen/software/clamsmtp/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
-PreReq:		rc-scripts
-Requires:	clamav
 Requires(post,preun):	/sbin/chkconfig
+Requires:	clamav
+Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -76,7 +76,7 @@ fi
 %doc AUTHORS ChangeLog NEWS README
 %attr(754,root,root) /etc/rc.d/init.d/clamsmtpd
 %attr(755,root,root) %{_sbindir}/*
-%config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/clamsmtpd.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/clamsmtpd.conf
 %dir %attr(770,root,clamav) /var/spool/clamsmtpd
 %dir %attr(770,root,clamav) /var/spool/clamsmtpd/tmp
 %{_mandir}/man5/clamsmtpd.conf.5*
