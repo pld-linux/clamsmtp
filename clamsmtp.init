@@ -33,7 +33,7 @@ case "$1" in
 		rm -f /var/lock/subsys/clamsmtpd >/dev/null 2>&1
 	else
 		msg_not_running clamsmtpd
-	fi	
+	fi
 	;;
   restart)
 	$0 stop
