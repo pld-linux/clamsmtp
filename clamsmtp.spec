@@ -1,12 +1,12 @@
 Summary:	clamav-based antivirus SMTP-level gateway
 Summary(pl):	Oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
-Version:	1.5
+Version:	1.6
 Release:	1
 License:	BSD
 Group:		Applications/Networking
 Source0:	http://memberwebs.com/nielsen/software/clamsmtp/%{name}-%{version}.tar.gz
-# Source0-md5:	521e43f5872cab8e53c21285041a759f
+# Source0-md5:	19fed666c77bb26039c5412c2559249d
 Source1:	%{name}.init
 Patch0:		%{name}-config.patch
 URL:		http://memberwebs.com/nielsen/software/clamsmtp/
