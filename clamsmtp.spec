@@ -13,6 +13,7 @@ URL:		http://memberwebs.com/nielsen/software/clamsmtp/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	clamav
 Requires:	rc-scripts
@@ -57,17 +58,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add clamsmtpd
-if [ -f /var/lock/subsys/clamsmtpd ]; then
-	/etc/rc.d/init.d/clamsmtpd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/clamsmtpd start\" to start inet server" 1>&2
-fi
+%service clamsmtpd restart
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/clamsmtpd ]; then
-		/etc/rc.d/init.d/clamsmtpd stop 1>&2
-	fi
+	%service clamsmtpd stop
 	/sbin/chkconfig --del clamsmtpd
 fi
 
