@@ -1,5 +1,5 @@
 Summary:	clamav-based antivirus SMTP-level gateway
-Summary(pl):	Oparta na clamavie bramka antywirusowa SMTP
+Summary(pl.UTF-8):   Oparta na clamavie bramka antywirusowa SMTP
 Name:		clamsmtp
 Version:	1.6
 Release:	1
@@ -23,8 +23,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 clamsmtp provides transparent antivirus scanner gateway for the SMTP
 protocol.
 
-%description -l pl
-clamsmtp dostarcza przezroczyst± bramkê antywirusow± dla protoko³u
+%description -l pl.UTF-8
+clamsmtp dostarcza przezroczystÄ… bramkÄ™ antywirusowÄ… dla protokoÅ‚u
 SMTP.
 
 %prep
