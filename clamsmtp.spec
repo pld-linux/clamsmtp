@@ -4,7 +4,7 @@ Name:		clamsmtp
 Version:	1.10
 Release:	1
 License:	BSD
-Group:		Applications/Networking
+Group:		Applications/Networking/SMTP
 Source0:	http://memberwebs.com/nielsen/software/clamsmtp/%{name}-%{version}.tar.gz
 # Source0-md5:	b068ba6e444859782bbdd88f290c1abf
 Source1:	%{name}.init
